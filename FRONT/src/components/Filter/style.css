@@ -1,0 +1,100 @@
+.container-filter {
+  width: 960px;
+  height: 215px;
+
+  background: #fafafa;
+  box-shadow: 0px 2px 11px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+
+  margin-top: 25px;
+}
+
+.cards {
+  display: flex;
+  padding-top: 27px;
+  padding-left: 42px;
+}
+
+.card label {
+  color: #484848;
+}
+
+.card {
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 14px;
+
+  color: #b9b9b9;
+
+  width: 250px;
+  height: 170px;
+
+  margin-right: 40px;
+}
+
+.card h1 {
+  margin-bottom: 20px;
+}
+
+.card input {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  padding-left: 3px;
+  color: #000;
+
+  height: 25px;
+  width: 80px;
+
+  background: #ffffff;
+  border: 1px solid #7b61ff;
+  border-radius: 2px;
+
+  margin-bottom: 15px;
+}
+
+.week-day-btns {
+  display: flex;
+  flex-wrap: wrap;
+
+  width: 180px;
+
+  gap: 9px;
+
+  border-right: 1px solid #eaeaea;
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+
+  width: 250px;
+  height: 110px;
+
+  gap: 9px;
+
+  border-right: 1px solid #eaeaea;
+}
+
+.container-ship {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 10px;
+  width: 100px;
+  height: 30px;
+
+  color: #000;
+  background: #fafafa;
+  box-shadow: 0px 2px 11px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.filter-btns {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}

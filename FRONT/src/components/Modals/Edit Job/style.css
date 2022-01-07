@@ -1,0 +1,41 @@
+.container-resume {
+  background: #fafafa;
+  box-shadow: 0px 2px 11px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+
+  padding: 33px;
+  width: 240px;
+}
+
+.container-resume h1 {
+  margin-bottom: 25px;
+}
+
+.resume-itens {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.confirm-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.close-icon {
+  height: 30px;
+  width: 30px;
+}
+
+.in {
+  color: #645ffb;
+}
+
+.out {
+  color: #fa8c10;
+}
+
+.balance {
+  color: #3a9ff1;
+}
