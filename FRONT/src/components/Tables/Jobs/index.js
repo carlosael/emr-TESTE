@@ -8,15 +8,16 @@ export function Table({ jobs, loadJobs, setEditJobsModal,setJobsInEditing,setJob
   const [deleteModal, setDeleteModal] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
 
-  async function handleDelete(transactionId) {
+  async function handleDelete(jobId) {
     try {
-      await fetch(`http://localhost:3000/cargos/${transactionId}`, {
+      await fetch(`http://localhost:3000/cargos/${jobId}`, {
         method: "DELETE",
       });
     } catch (error) {
       console.log(error);
     }
 
+    console.log(jobId)
     setDeleteModal(false);
     await loadJobs();
     setDeleteId(null)

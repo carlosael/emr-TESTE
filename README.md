@@ -52,6 +52,7 @@ E depois:
   $ cd src
   # Instale as dependencias
   $ yarn ou npm install
+  # Coloque sua senha de acesso no arquivo 'conexao.js'
   # Rode a aplicação
   $ yarn start ou npx nodemon .\index.js
 ```

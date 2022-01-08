@@ -55,7 +55,6 @@ function App() {
       const data = await response.json();
 
       setJobs(data);
-      console.log("foi")
     } catch (error) {
       console.log(error);
     }

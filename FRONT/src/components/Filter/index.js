@@ -2,7 +2,7 @@ import "./style.css";
 import Button from "../Button/index";
 import { useEffect, useState } from "react";
 
-function Filter({ employeeData, setEmployeeData, Employees }) {
+function Filter({ employeeData, setEmployeeData, loadEmployees }) {
   const [minValue, setMinValue] = useState();
   const [maxValue, setMaxValue] = useState();
   const [categories, setCategories] = useState([]);
@@ -11,7 +11,7 @@ function Filter({ employeeData, setEmployeeData, Employees }) {
 
   useEffect(() => {
     const allCategories = employeeData.map(
-      (transaction) => transaction.cargo
+      (employee) => employee.cargo
     );
     setCategories(allCategories);
   }, [employeeData]);
@@ -39,11 +39,11 @@ function Filter({ employeeData, setEmployeeData, Employees }) {
 
     if (minValue >= maxValue) return;
 
-    const filteredTransactions = employeeData.filter((transaction) => {
-      if (transaction.salario >= minValue && transaction.salario <= maxValue) {
+    const filteredTransactions = employeeData.filter((employee) => {
+      if (employee.salario >= minValue && employee.salario <= maxValue) {
         if (selectedCategories.length !== 0) {
           return (
-            selectedCategories.includes(transaction.cargo)
+            selectedCategories.includes(employee.cargo)
           );
         } else {
           return true;
@@ -55,7 +55,7 @@ function Filter({ employeeData, setEmployeeData, Employees }) {
   }
 
   async function handleClearFilters() {
-    await Employees();
+    await loadEmployees();
     setMaxValue("");
     setMinValue("");
     setSelectedCategories([]);

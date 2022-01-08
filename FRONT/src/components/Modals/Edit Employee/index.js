@@ -46,7 +46,7 @@ export function EditModal(props) {
       });
 
       props.setEmployeeData(newArray);
-      props.Employees()
+      props.loadEmployees()
     } catch (error) {
       console.log(error);
     }

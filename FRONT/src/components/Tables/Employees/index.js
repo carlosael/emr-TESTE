@@ -141,46 +141,46 @@ function formatDate(date) {
         
       </div>
       <div className="table-body">
-        {employeeData.map((transaction) => (
-          <div className="table-line" key={transaction.id}>
-            <span className="table-item">{transaction.nome}</span>
-            <span className="table-item">{transaction.sobrenome}</span>
-            <span className="table-item">{transaction.cargo}</span>
+        {employeeData.map((employee) => (
+          <div className="table-line" key={employee.id}>
+            <span className="table-item">{employee.nome}</span>
+            <span className="table-item">{employee.sobrenome}</span>
+            <span className="table-item">{employee.cargo}</span>
             <span 
             className="table-item"
             style={{
               fontWeight: "bold"
             }}
-            >{formatDate(transaction.data_de_nascimento)}</span>
+            >{formatDate(employee.data_de_nascimento)}</span>
             <span 
             className="table-item"
             style={{
               fontWeight: "bold"
             }}
-            >{formatDate(transaction.data_de_admissao)}</span>
-            <span className="table-item">R$ {parseFloat(transaction.salario).toFixed(2)}</span>
+            >{formatDate(employee.data_de_admissao)}</span>
+            <span className="table-item">R$ {parseFloat(employee.salario).toFixed(2)}</span>
             <div className="edit-delete-icons">
               <img
-                id={transaction.id}
+                id={employee.id}
                 src={Pen}
                 alt="Pen"
                 className="edit-icon"
                 onClick={() => {
                   setEditEmployeeModal(true);
-                  setEmployeeInEditing({ ...transaction });
+                  setEmployeeInEditing({ ...employee });
                 }}
               />
               <img
                 src={Trashcan}
                 alt="Trash Can"
                 className="delete-icon"
-                id={transaction.id}
+                id={employee.id}
                 onClick={() => {
                   setDeleteModal(true);
-                  setDeleteId(transaction.id)
+                  setDeleteId(employee.id)
                 }}
               />
-              {deleteModal && deleteId === transaction.id && (
+              {deleteModal && deleteId === employee.id && (
                 <>
                 <img src={Indicator} className="indicator" alt="Indicator"/>
                   <div className="container-confirm-delete">
@@ -188,7 +188,7 @@ function formatDate(date) {
                     <div className="confirm-delete-btns">
                       <button 
                       className="btn-actions-confirm-delete"
-                      onClick={() => handleDelete(transaction.id)}>
+                      onClick={() => handleDelete(employee.id)}>
                         Sim
                       </button>
                       <button 
