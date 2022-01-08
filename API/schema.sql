@@ -1,6 +1,6 @@
 CREATE DATABASE registros;
 
-create table if not exists funcionarios (
+CREATE TABLE IF NOT EXISTS funcionarios (
     id serial primary key,
     nome text not null,
   	sobrenome text not null,
@@ -10,7 +10,7 @@ create table if not exists funcionarios (
   	salario int not null
 );
 
-create table if not exists cargos (
+CREATE TABLE IF NOT EXISTS cargos (
     id serial primary key,
     descricao text not null,
     atividades text not null

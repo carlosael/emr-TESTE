@@ -5,6 +5,7 @@ import Trashcan from "../../../assets/lixeira.svg";
 import DownArrow from "../../../assets/setaPraBaixo.svg";
 import UpArrow from "../../../assets/setaFiltro.svg";
 import Indicator from "../../../assets/indicador.svg";
+import sortEmployees from "../../../helpers/sortEmployees";
 
 export function Table({ employeeData, loadEmployees, setEditEmployeeModal,setEmployeeInEditing,setEmployeeData }) {
   const [deleteModal, setDeleteModal] = useState(false);
@@ -35,6 +36,47 @@ export function Table({ employeeData, loadEmployees, setEditEmployeeModal,setEmp
     
   }
 
+  
+  function handleOrderByBirthDate () {
+    if (orderByBirthDate === "" || orderByBirthDate === "decrescent") {
+      setArrowDirection(false)
+      setOrderByBirthDate("crescent")
+      setOrderBySalary("")
+      setOrderByAdmissionDate("")
+      
+      const dataInOrder = employeeData.sort(sortEmployees.byBirthAsc);
+      
+      setEmployeeData(dataInOrder);
+    } else {
+      setOrderByBirthDate("decrescent")
+      setOrderBySalary("")
+      setArrowDirection(true)
+      const dataInOrder = employeeData.sort(sortEmployees.byBirthDsc);
+      
+      setEmployeeData(dataInOrder);
+    }
+  }
+  
+  function handleOrderByAdmissionDate () {
+    if (orderByAdmissionDate === "" || orderByAdmissionDate === "decrescent") {
+      setArrowDirection(true)
+      setOrderByBirthDate("")
+      setOrderBySalary("")
+      setOrderByAdmissionDate("crescent")
+      
+      const dataInOrder = employeeData.sort(sortEmployees.byAdmissionAsc);
+      
+      setEmployeeData(dataInOrder);
+    } else {
+      setOrderByAdmissionDate("decrescent")
+      setOrderBySalary("")
+      setArrowDirection(false)
+      const dataInOrder = employeeData.sort(sortEmployees.byAdmissionDsc);
+      
+      setEmployeeData(dataInOrder);
+    }
+  }
+  
   async function handleDelete(transactionId) {
     try {
       await fetch(`http://localhost:3000/funcionarios/${transactionId}`, {
@@ -45,73 +87,16 @@ export function Table({ employeeData, loadEmployees, setEditEmployeeModal,setEmp
     }
 
     setDeleteModal(false);
-    await loadEmployees();
+    await loadEmployees(setEmployeeData);
     setDeleteId(null)
   }
 
-  function handleOrderByBirthDate () {
-    if (orderByBirthDate === "" || orderByBirthDate === "decrescent") {
-      setArrowDirection(false)
-      setOrderByBirthDate("crescent")
-      setOrderBySalary("")
-      setOrderByAdmissionDate("")
+  function formatDate(date) {
+    let newDate = new Date(date);
+    const formattedDate = newDate.toLocaleDateString('pt-BR', { timeZone: 'UTC' })
 
-      const dataInOrder = employeeData.sort(function(a,b) {
-        const firstDate =  a.data_de_nascimento.split('/').reverse().join('');
-        const secondDate = b.data_de_nascimento.split('/').reverse().join('');
-        return firstDate < secondDate ? 1 : firstDate > secondDate ? -1 : 0;
-      });
-
-      setEmployeeData(dataInOrder);
-    } else {
-      setOrderByBirthDate("decrescent")
-      setOrderBySalary("")
-      setArrowDirection(true)
-      const dataInOrder = employeeData.sort(function(a,b) {
-        const firstDate =  a.data_de_nascimento.split('/').reverse().join('');
-        const secondDate = b.data_de_nascimento.split('/').reverse().join('');
-        return firstDate > secondDate ? 1 : firstDate < secondDate ? -1 : 0;
-      });
-
-    setEmployeeData(dataInOrder);
-    }
+    return formattedDate;
   }
-
-  function handleOrderByAdmissionDate () {
-    if (orderByAdmissionDate === "" || orderByAdmissionDate === "decrescent") {
-      setArrowDirection(true)
-      setOrderByBirthDate("")
-      setOrderBySalary("")
-      setOrderByAdmissionDate("crescent")
-
-      const dataInOrder = employeeData.sort(function(a,b) {
-        const firstDate =  a.data_de_admissao.split('/').reverse().join('');
-        const secondDate = b.data_de_admissao.split('/').reverse().join('');
-        return firstDate < secondDate ? 1 : firstDate > secondDate ? -1 : 0;
-      });
-
-      setEmployeeData(dataInOrder);
-    } else {
-      setOrderByAdmissionDate("decrescent")
-      setOrderBySalary("")
-      setArrowDirection(false)
-      const dataInOrder = employeeData.sort(function(a,b) {
-        const firstDate =  a.data_de_admissao.split('/').reverse().join('');
-        const secondDate = b.data_de_admissao.split('/').reverse().join('');
-        return firstDate > secondDate ? 1 : firstDate < secondDate ? -1 : 0;
-      });
-
-    setEmployeeData(dataInOrder);
-    }
-  }
-
-
-function formatDate(date) {
-  let newDate = new Date(date);
-  const formattedDate = newDate.toLocaleDateString('pt-BR', { timeZone: 'UTC' })
-
-  return formattedDate;
-}
 
   return (
     <div className="table">
@@ -124,19 +109,19 @@ function formatDate(date) {
         onClick={() => handleOrderByBirthDate()}
         >
           Data de nascimento
-        {orderByBirthDate && <img src={arrowDirection === false ? DownArrow : UpArrow} alt="Down arrow"/>}
+        {orderByBirthDate && <img src={arrowDirection ? UpArrow : DownArrow} alt="Down arrow"/>}
         </span>
         <span 
         className="head-item"
         onClick={() => handleOrderByAdmissionDate()}
         >
           Data de admissão
-        {orderByAdmissionDate && <img src={arrowDirection === false ? DownArrow : UpArrow} alt="Down arrow"/>}
+        {orderByAdmissionDate && <img src={arrowDirection ? UpArrow : DownArrow} alt="Down arrow"/>}
         </span>
         <span className="head-item"
         onClick={() => handleOrderBySalary()}
         >Salário
-        {orderBySalary && <img src={arrowDirection === false ? DownArrow : UpArrow} alt="Down arrow"/>}</span>
+        {orderBySalary && <img src={arrowDirection ? UpArrow : DownArrow} alt="Down arrow"/>}</span>
         <span className="head-item no-cursor"></span>
         
       </div>

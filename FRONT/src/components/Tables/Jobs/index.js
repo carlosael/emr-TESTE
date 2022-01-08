@@ -19,7 +19,7 @@ export function Table({ jobs, loadJobs, setEditJobsModal,setJobsInEditing,setJob
 
     console.log(jobId)
     setDeleteModal(false);
-    await loadJobs();
+    await loadJobs(setJobs);
     setDeleteId(null)
   }
 

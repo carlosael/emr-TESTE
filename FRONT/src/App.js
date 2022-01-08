@@ -9,6 +9,8 @@ import JobsModal from "./components/Modals/Add Job/index";
 import EditJobsModal from "./components/Modals/Edit Job/index";
 import Filter from "./components/Filter/index";
 import littleFilter from "./assets/filtro.svg";
+import loadEmployees from "./services/loadEmployees";
+import loadJobs from "./services/loadJobs";
 
 function App() {
   const [employeeData, setEmployeeData] = useState([]);
@@ -22,43 +24,9 @@ function App() {
   const [jobs, setJobs] = useState([]);
 
   useEffect(() => {
-    loadEmployees()
-    loadJobs()
+    loadEmployees(setEmployeeData)
+    loadJobs(setJobs)
   }, []);
-
-  async function loadEmployees() {
-    try {
-      const response = await fetch("http://localhost:3000/funcionarios", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      const data = await response.json();
-
-      setEmployeeData(data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function loadJobs() {
-    try {
-      const response = await fetch("http://localhost:3000/cargos", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      const data = await response.json();
-
-      setJobs(data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
   return (
     <div className="App">
@@ -68,7 +36,7 @@ function App() {
           <div className="filter-btn">
             <button
               className="open-filters-button"
-              onClick={() => setOpenFilter(openFilter === false ? true : false)}
+              onClick={() => setOpenFilter(!openFilter)}
             >
               <img src={littleFilter} alt="Filter" />
               Filtrar

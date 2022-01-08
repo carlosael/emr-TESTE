@@ -1,13 +1,13 @@
 import "./style.css";
 import Button from "../Button/index";
 import { useEffect, useState } from "react";
+import buttonsStyles from "../../helpers/buttonsStyles";
 
 function Filter({ employeeData, setEmployeeData, loadEmployees }) {
   const [minValue, setMinValue] = useState();
   const [maxValue, setMaxValue] = useState();
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
-
 
   useEffect(() => {
     const allCategories = employeeData.map(
@@ -55,7 +55,7 @@ function Filter({ employeeData, setEmployeeData, loadEmployees }) {
   }
 
   async function handleClearFilters() {
-    await loadEmployees();
+    await loadEmployees(setEmployeeData);
     setMaxValue("");
     setMinValue("");
     setSelectedCategories([]);
@@ -75,11 +75,9 @@ function Filter({ employeeData, setEmployeeData, loadEmployees }) {
                 onClick={() => handleCategories(category)}
                 style={{
                   background: selectedCategories.some((c) => c === category)
-                    ? "#7B61FF"
-                    : "",
+                    && "#7B61FF",
                   color: selectedCategories.some((c) => c === category)
-                    ? "white"
-                    : "",
+                    && "white",
                 }}
               >
                 {category}{" "}
@@ -112,15 +110,7 @@ function Filter({ employeeData, setEmployeeData, loadEmployees }) {
         <div className="filter-btns">
           <Button
             className="btn-clear-filters"
-            style={{
-              background: "#FAFAFA",
-              color: "#000",
-              boxShadow: "0px 2px 11px rgba(0, 0, 0, 0.1)",
-              borderRadius: "10px",
-              width: "98px",
-              height: "30px",
-              fontSize: "12px",
-            }}
+            style={buttonsStyles.clearFilter}
             onClick={handleClearFilters}
           >
             Limpar Filtros
@@ -128,16 +118,7 @@ function Filter({ employeeData, setEmployeeData, loadEmployees }) {
           <Button
             onClick={() => handleFilter()}
             className="btn-apply-filters"
-            style={{
-              background:
-                "linear-gradient(264.83deg, #3A9FF1 -3.28%, #05EDE3 100%)",
-              color: "#FFF",
-              boxShadow: "0px 2px 11px rgba(0, 0, 0, 0.1)",
-              borderRadius: "10px",
-              width: "98px",
-              height: "30px",
-              fontSize: "12px",
-            }}
+            style={buttonsStyles.applyFilter}
           >
             Aplicar Filtros
           </Button>

@@ -2,6 +2,7 @@ import "./style.css";
 import Button from "../../Button/index";
 import CloseBtn from "../../../assets/closeBtn.svg";
 import { useState } from "react";
+import buttonsStyles from "../../../helpers/buttonsStyles";
 
 export function EditModal(props) {
   const [nome, setNome] = useState(props.employeeInEditing.nome);
@@ -46,7 +47,7 @@ export function EditModal(props) {
       });
 
       props.setEmployeeData(newArray);
-      props.loadEmployees()
+      props.loadEmployees(props.setEmployeeData)
     } catch (error) {
       console.log(error);
     }
@@ -111,11 +112,7 @@ export function EditModal(props) {
         <div className="confirm-btn">
           <Button
             className="btn-insert"
-            style={{
-              background: "#645FFB",
-              color: "#FFF",
-              width: "236px",
-            }}
+            style={buttonsStyles.confirm}
             onClick={() => handleEditTransaction(props.employeeInEditing.id)}
           >
             Confirmar

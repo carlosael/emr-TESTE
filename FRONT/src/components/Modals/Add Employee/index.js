@@ -2,6 +2,7 @@ import "./style.css";
 import Button from "../../Button/index";
 import CloseBtn from "../../../assets/closeBtn.svg";
 import { useState } from "react";
+import buttonsStyles from "../../../helpers/buttonsStyles";
 
 export function Modal(props) {
   const [nome, setNome] = useState('');
@@ -30,8 +31,7 @@ export function Modal(props) {
       body: JSON.stringify(body),
     });
 
-    console.log(dataDeAdmissao)
-    props.loadEmployees();
+    props.loadEmployees(props.setEmployeeData);
     } catch (error) {
       console.log(error)
     }
@@ -96,11 +96,7 @@ export function Modal(props) {
         <div className="confirm-btn">
           <Button
             className="btn-insert"
-            style={{
-              background: "#645FFB",
-              color: "#FFF",
-              width: "236px",
-            }}
+            style={buttonsStyles.confirm}
             onClick={() => handleRegisterTransaction()}
           >
             Confirmar
